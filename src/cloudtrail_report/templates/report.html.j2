@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CloudTrail Audit Report</title>
+  <style>
+    body { font-family: system-ui, sans-serif; margin: 2rem; color: #1a1a1a; }
+    h1 { margin-bottom: 0.25rem; }
+    .meta { color: #555; margin-bottom: 1.5rem; font-size: 0.9rem; }
+    table { border-collapse: collapse; width: 100%; font-size: 0.8rem; }
+    th, td { border: 1px solid #d0d0d0; padding: 0.35rem 0.6rem; text-align: left; vertical-align: top; }
+    th { background: #f2f2f2; font-weight: 600; white-space: nowrap; }
+    tr:nth-child(even) td { background: #fafafa; }
+    .row-error td { color: #c0392b; }
+    .row-write td:nth-child(2) { font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>CloudTrail Audit Report</h1>
+  <p class="meta">{{ event_count }} management events &mdash; generated {{ generated_at }}</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Time (UTC)</th>
+        <th>Event</th>
+        <th>Principal Type</th>
+        <th>User</th>
+        <th>Source Service</th>
+        <th>Region</th>
+        <th>Source IP</th>
+        <th>RO?</th>
+        <th>Error</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for e in events %}
+      <tr class="{{ 'row-error' if e.error_code else ('row-write' if not e.read_only else '') }}">
+        <td>{{ e.event_time.strftime("%Y-%m-%d %H:%M:%S") if e.event_time else "—" }}</td>
+        <td>{{ e.event_name | default("—") }}</td>
+        <td>{{ e.principal_type | default("—") }}</td>
+        <td>{{ e.username | default("—") }}</td>
+        <td>{{ e.event_source | default("—") }}</td>
+        <td>{{ e.aws_region | default("—") }}</td>
+        <td>{{ e.source_ip | default("—") }}</td>
+        <td>{{ "No" if e.read_only else "Yes" }}</td>
+        <td>{{ e.error_code | default("") }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

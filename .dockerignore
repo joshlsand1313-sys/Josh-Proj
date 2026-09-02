@@ -1,0 +1,17 @@
+**/__pycache__
+**/*.pyc
+**/*.pyo
+.pytest_cache
+.git
+.gitignore
+.venv
+venv
+tests/
+validation-runs/
+docs/
+infra/
+Plan.md
+data-source.md
+CLAUDE.md
+T1
+test_normalize.py

@@ -1,0 +1,1 @@
+Phase 2 — Scope & Design. Read-only IAM policy (cloudtrail:LookupEvents, or Lake/Athena/S3 equivalents per Task 1). Document local auth (profile/SSO) and note what changes for the deployed image (task role, no keys). Deliverable: policy JSON in infra/iam/ + docs/setup.md. Depends on: Task 1.

@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# AWS — never commit credentials
+.aws/
+*.pem
+aws_credentials*
+credentials
+*_credentials*
+*.key
+*.secret
+
+# Environment / secrets
+.env
+.env.*
+*.env
+secrets.json
+secrets.yaml
+secrets.yml
+config.local.*
+
+# Generated reports
+output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
